@@ -8,15 +8,16 @@ export default {
     extend: {
       fontFamily: {
         'oswald': ['Oswald', 'sans-serif'],
-        'roboto': ['Roboto', 'sans-serif']
       },
       backgroundImage: {
-        'heroBg': 'url(./assets/img/elchalten3.avif)',
+        'heroBg': 'url(./assets/img/elchalten.webp)',
         'smartBg': 'url(./assets/img/smart.avif)',
         'smartBg2': 'url(./assets/img/smartBg.avif)',
-        'aboutBg2': 'url(./assets/img/letras.avif)',
-        'wavesBg': 'url(./assets/img/waves.avif)',
-        'paintBg': 'url(./assets/img/orange.png)',
+        'aboutBg2': 'url(./assets/img/bgx.webp)',
+        'contactBg': 'url(./assets/img/bgContact.avif)',
+        'paintBg': 'url(./assets/img/bgInstall.webp)',
+        'SectionBg': 'url(./assets/img/bgAppSection.webp)',
+
 
 
       }

@@ -1,7 +1,9 @@
-import React from 'react'
 import Logo from '../assets/img/infochalten.avif'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
 
 const Banner = () => {
+  
   return (
     <>
     <div className='px-2'>
@@ -9,7 +11,7 @@ const Banner = () => {
     <div className=''>
       <div className='flex items-center justify-center'>
       <div className='border border-pink-400 w-full'></div>
-        <img src={Logo} alt="" className='h-36'/><div className='border border-pink-400 w-full'></div>
+        <LazyLoadImage src={Logo} alt="Info Chalten logo" className='h-36 w-32'/><div className='border border-pink-400 w-full' loading="lazy"></div>
       </div>
     </div>
     </div>

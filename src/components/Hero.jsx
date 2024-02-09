@@ -1,130 +1,75 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import VisibilitySensor from 'react-visibility-sensor';
-import { useIdioma } from './IdiomaContext';
+import { useIdioma } from "./IdiomaContext";
+import AnimatedText from "./AnimatedText";
+import { InView } from "react-intersection-observer";
 
 const Hero = () => {
-
-  const { idiomaActual, cambiarIdioma } = useIdioma();
+  const { idiomaActual } = useIdioma();
 
   const textos = {
-    'es': {
-      'titulo': 'Bienvenidos a la APP de InfoChaltén',
-      'subtitulo': 'Encontrá toda la información necesaria para que tu estadía en El Chaltén sea sumamente agradable',
-      'textButton': 'Ir a la APP',
+    es: {
+      titulo: "Bienvenid@s a Info Chalten",
+      subtitulo:
+        "Toda la información que necesitás para aprovechar El Chaltén al máximo",
+      textButton: "Ir a la APP",
     },
-    'en': {
-      'titulo': 'Welcome to the InfoChaltén App',
-      'subtitulo': 'Find all the necessary information to make your stay in El Chaltén extremely enjoyable',
-      'textButton': 'Go to the App',
-    }
-  };
-
-  const sentence = {
-    hidden: {
-      opacity: 0,
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        delay: 0.2,
-        staggerChildren: 0.05,
-      },
+    en: {
+      titulo: "Welcome to the Info Chalten App",
+      subtitulo:
+        "All the information you need to make the most of El Chaltén.",
+      textButton: "Go to the App",
     },
   };
-
-  const sentenceSub = {
-    hidden: {
-      opacity: 0,
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        delay: 0.1,
-        staggerChildren: 0.02,
-      },
-    },
-  };
-
-  const sentenceBtn = {
-    hidden: {
-      opacity: 0,
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        delay: 0.1,
-        staggerChildren: 0.15,
-      },
-    },
-  };
-
-  const letter = {
-    hidden: {
-      opacity: 0,
-      y: 50,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-    },
-  };
-
-  const [isVisible, setIsVisible] = useState(false);
-
-  const onVisibilityChange = (isVisible) => {
-    setIsVisible(isVisible);
-  };
+  
 
   return (
-    <div className="w-full h-screen bg-heroBg flex flex-col items-center justify-center bg-center bg-cover">
-      <div className="mt-96 text-center xxl:mt-24 xl:mt-8 sm:mt-0">
-        <VisibilitySensor onChange={onVisibilityChange} partialVisibility>
-          {({ isVisible }) => (
-            <motion.h1
-              className="font-oswald text-6xl font-bold text-white sm:text-4xl xs:text-2xl"
-              variants={sentence}
-              initial="hidden"
-              animate={isVisible ? "visible" : "hidden"}
+    <div className="w-full min-h-[100vh] flex flex-col items-center justify-center bg-heroBg bg-no-repeat bg-cover" id="main-view">
+      <div className="xxl:mt-24  sm:mt-20">
+        <InView triggerOnce={false} rootMargin="-100px 0px">
+          {({ inView: inViewTitle, ref: refTitle }) => (
+            <div
+              className="font-oswald font-bold mb-4"
+              ref={refTitle}
             >
-              {textos[idiomaActual].titulo.split("").map((char, index) => (
-                <motion.span key={char + "-" + index} variants={letter}>
-                  {char}
-                </motion.span>
-              ))}
-            </motion.h1>
+              <AnimatedText
+                text={textos[idiomaActual].titulo}
+                className=" !text-5xl text-orange-400 xl:!text-4xl lg:!text-center lg:!text-5xl md:!text-4xl sm:!text-3xl sm:ml-2"
+                inView={inViewTitle}
+              />
+            </div>
           )}
-        </VisibilitySensor>
-        <VisibilitySensor onChange={onVisibilityChange} partialVisibility>
-          {({ isVisible }) => (
-            <motion.p
-              className="font-oswald text-3xl font-semibold mb-2 text-white xxl:my-4 sm:my-6 sm:text-2xl sm:px-2 xs:text-xl xs:px-1"
-              variants={sentenceSub}
-              initial="hidden"
-              animate={isVisible ? "visible" : "hidden"}
+        </InView>
+        <InView triggerOnce={false} rootMargin="-100px 0px">
+          {({ inView: inViewSubtitle, ref: refSubtitle }) => (
+            <div
+              className="font-oswald mb-2 xxl:my-4 sm:my-6 sm:text-2xl sm:px-1 xs:text-xl "
+              ref={refSubtitle}
             >
-              {textos[idiomaActual].subtitulo.split("").map((char, index) => (
-                <motion.span key={char + "-" + index} variants={letter}>
-                  {char}
-                </motion.span>
-              ))}
-            </motion.p>
+              <AnimatedText
+                text={textos[idiomaActual].subtitulo}
+                className="!text-5xl font-semibold text-white xl:!text-4xl lg:!text-center lg:!text-5xl md:!text-4xl sm:!text-3xl"
+                inView={inViewSubtitle}
+              />
+            </div>
           )}
-        </VisibilitySensor>
-
-        <a href="https://infochalten.glide.page/" target='_blank' className="border bg-gradient-to-b from-orange-500 to-yellow-300 flex items-center justify-center w-48 h-20 rounded-2xl font-oswald uppercase font-semibold text-3xl text-center m-auto mb-2 sm:text-2xl">
-          <VisibilitySensor onChange={onVisibilityChange} partialVisibility>
-            {({ isVisible }) => (
-              <motion.p variants={sentenceBtn} initial="hidden" animate={isVisible ? "visible" : "hidden"}>
-                {textos[idiomaActual].textButton.split("").map((char, index) => (
-                  <motion.span key={char + "-" + index} variants={letter}>
-                    {char}
-                  </motion.span>
-                ))}
-              </motion.p>
-            )}
-          </VisibilitySensor>
-        </a>
+        </InView>
+        <InView triggerOnce={false} rootMargin="-100px 0px">
+          {({ inView: inViewButton, ref: refButton }) => (
+            <a
+              href="https://infochalten.glide.page/"
+              target="_blank"
+              rel="noreferrer"
+              className="border-4 border-orange-500 bg-orange-500 text-white flex items-center justify-center w-48 h-20 rounded-2xl
+               font-oswald uppercase font-semibold text-center m-auto mb-2 mt-10 "
+              ref={refButton}
+            >
+              <AnimatedText
+                text={textos[idiomaActual].textButton}
+                className="!w-full !text-3xl xl:!text-4xl lg:!text-center lg:!text-4xl md:!text-3xl sm:!text-2xl"
+                inView={inViewButton}
+              />
+            </a>
+          )}
+        </InView>
       </div>
     </div>
   );

@@ -1,30 +1,45 @@
-import { useState } from 'react'
-import NavBar from './components/NavBar'
-import Hero from './components/Hero'
-import { AppSection } from './components/AppSection'
-import { About } from './components/About'
-import { Contact } from './components/Contact'
-import Footer from './components/Footer'
-import Banner from './components/Banner'
-import { IdiomaProvider } from './components/IdiomaContext'
-import Install from './components/Install'
+import React, { lazy, Suspense } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+const NavBar = lazy(() => import('./components/NavBar'));
+const Hero = lazy(() => import('./components/Hero'));
+const AppSection = lazy(() => import('./components/AppSection'));
+const About = lazy(() => import('./components/About'));
+const Contact = lazy(() => import('./components/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
+const Banner = lazy(() => import('./components/Banner'));
+const Install = lazy(() => import('./components/Install'));
+const RedireccionarIdioma = lazy(() => import('./components/RedireccionarIdioma'));
+import { IdiomaProvider } from './components/IdiomaContext';
 
 function App() {
-
   return (
     <>
-    <IdiomaProvider>
-        <NavBar />
-        <Hero /> 
-        <Install />
-        <AppSection />
-        <Banner />
-        <About />
-        <Contact />
-        <Footer />
-      </IdiomaProvider>
+      <Router>
+        <IdiomaProvider>
+          <RedireccionarIdioma />
+
+          {/* Carga inmediata de Hero y NavBar */}
+          <Suspense fallback={<div>Loading...</div>}>
+          <NavBar /> 
+            <Hero />
+            
+          </Suspense>
+
+          {/* Carga diferida de otros componentes */}
+          <Suspense fallback={<div>Loading...</div>}>
+            <Install />
+            <AppSection />
+            <Banner />
+            <About />
+            <Contact />
+            <Footer />
+          </Suspense>
+
+        </IdiomaProvider>
+      </Router>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

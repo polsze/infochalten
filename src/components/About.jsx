@@ -1,89 +1,117 @@
-import React, { useState, useEffect } from 'react';
-import { Icon } from '@iconify/react';
-import { motion } from 'framer-motion';
-import VisibilitySensor from 'react-visibility-sensor';
-import { useIdioma } from './IdiomaContext'; // Asegúrate de importar el contexto adecuado
+import { motion } from "framer-motion";
+import { useIdioma } from "./IdiomaContext";
+import { useInView } from "react-intersection-observer";
+import imgAbout from "../assets/img/imgAbout.webp";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export const About = () => {
-  const { idiomaActual, cambiarIdioma } = useIdioma();
+  const [refAboutImage, inViewImage] = useInView({
+    triggerOnce: false,
+    rootMargin: "-100px 0px",
+  });
+
+  const [refAboutText, inViewText] = useInView({
+    triggerOnce: false,
+    rootMargin: "-100px 0px",
+  });
+
+  const { idiomaActual } = useIdioma();
 
   const titulos = {
-    'es': 'Sobre Nosotros',
-    'en': 'About Us',
+    es: "Sobre Nosotros",
+    en: "About Us",
   };
 
   const contenido = {
-    'es': 'Este proyecto nace en redes sociales, en un pueblo pequeño donde las personas que precisaban comprar algún producto en particular o contratar servicios no disponían de información centralizada y ordenada, y siempre había que estar preguntando ¿quién hace esto? ¿quién vende aquello? A esto se le sumó por interés personal y el de tantas más, la oferta de comida para llevar. Hoy no cocino! Y, de repente, me encontré con que estos intereses de la comunidad también podían ser de interés para el turismo que nos visita cada año. De esta manera comencé a ampliar la base de datos, llegando a lo que hoy es InfoChalten, una plataforma que brinde toda la información disponible y conecte a productores, artistas, comercios, prestadores de servicios, etc. Todo en un solo lugar y totalmente gratis.',
-    'en': 'This project was born on social media, in a small town where people who needed to buy a particular product or hire services did not have centralized and organized information, and you always had to be asking who does this? who sells that? To this was added, for personal interest and that of many more, the offer of take-out food. Today I don\'t cook! And suddenly, I found that these community interests could also be of interest to the tourism that visits us every year. In this way, I began to expand the database, reaching what is now InfoChalten, a platform that provides all available information and connects producers, artists, businesses, service providers, etc. All in one place and totally free.',
+    es: "Hola mi nombre es Germán, y espero que Info Chalten te sea de utilidad. \n \n \n Este proyecto nace en redes sociales, en un pueblo pequeño donde las personas que precisaban comprar algún producto en particular o contratar servicios no disponían de información centralizada y ordenada, y siempre había que estar preguntando ¿quién hace esto? ¿quién vende aquello? A esto se le sumó, por interés personal, la oferta de comida a domicilio. ¡Hoy no cocino! Y de repente me encontré con que estos intereses de la comunidad también podían ser de interés para el turismo que nos visita cada año.\n \n \n De esta manera comencé a ampliar la base de datos, llegando a lo que hoy es Info Chalten. Una plataforma que brinda información de la oferta local, conectando visitantes y residentes con productoras, artistas, comercios, servicios, etc. Todo en un solo lugar y totalmente gratis. \n\n \n",
+    en: "Hello my name is Germán, and I hope that Info Chalten will be useful to you. This project was born in social networks, in a small town where people who needed to buy a particular product or hire services did not have centralized and organized information, and they always had to ask: who does this? who sells that? Added to this, out of personal interest, was the offer of home delivery. Today I don't cook! And suddenly I found that these interests of the community could also be of interest to the tourism that visits us every year. In this way I began to expand the database, reaching what is today Info Chalten. A platform that provides information on local offerings, connecting visitors and residents with producers, artists, businesses, services, etc. Everything in one place and totally free.",
   };
 
-  const sentence = {
-    hidden: {
-      opacity: 1,
+  const imageAlts = {
+    es: {
+      imgAbout: "Conocé acerca de Info Chalten",
     },
-    visible: {
-      opacity: 1,
-      transition: {
-        delay: 0.5,
-        staggerChildren: 0.09,
-      },
+    en: {
+      imgAbout: "Learn about Info Chaltén",
     },
   };
 
-  const letter = {
-    hidden: {
-      opacity: 0,
-      y: 50,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-    },
+  const getImageAltText = (imageName, currentLanguage) => {
+    return imageAlts[currentLanguage]?.[imageName] || "";
   };
-
-  const [isVisible, setIsVisible] = useState(false);
-
-  const onVisibilityChange = (isVisible) => {
-    setIsVisible(isVisible);
-  };
-
-  useEffect(() => {
-    setIsVisible(false); 
-  }, [idiomaActual]);
 
   return (
     <>
-      <div className='w-full h-auto mt-8 bg-aboutBg2 lg:bg-none'>
-        <motion.div className='flex m-auto w-[60%] h-4/5 bg-gray-100 shadow-2xl shadow-orange-500 rounded-xl xl:w-[70%] lg:w-[90%] sm:w-[96%]'>
-          <div className='flex flex-col items-center font-oswald text-center'>
-            <VisibilitySensor onChange={onVisibilityChange} partialVisibility>
-              <motion.h3
-                className='text-5xl my-16 uppercase font-bold'
-                variants={sentence}
-                initial="hidden"
-                animate={isVisible ? "visible" : "hidden"}
-              >
+      <motion.div
+        id="about"
+        className="h-auto flex items-center justify-center max-w-screen-xl bg-aboutBg2 bg-contain bg-no-repeat bg-center sm:flex-col sm:bg-none"
+        initial={{ x: "-50%" }}
+        animate={{ x: inViewImage ? 0 : "-50%" }}
+        transition={{ duration: 1.3, ease: "easeInOut" }}
+        ref={refAboutImage}
+      >
+        <div className="mt-10">
+          <div className="image object-center text-center">
+            <LazyLoadImage
+              src={imgAbout}
+              alt={getImageAltText("imgAbout", idiomaActual)}
+              loading="lazy"
+              width={512}
+              height={512}
+            />
+          </div>
+        </div>
+
+        <div className="">
+          <div className="text">
+            <span className="text-gray-500 border-b-2 border-indigo-600 uppercase"></span>
+            <h2 className="my-4 font-bold text-3xl  sm:text-4xl ">
+              <span className="text-gray-200 text-7xl relative top-10 left-2 -z-10 sm:text-4xl sm:top-7 sm:left-1">
                 {titulos[idiomaActual].split("").map((char, index) => (
-                  <motion.span key={char + "-" + index} variants={letter}>
+                  <motion.span
+                    key={char + "-" + index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: inViewImage ? 1 : 0 }}
+                    transition={{ duration: 1, ease: "easeIn" }}
+                  >
                     {char}
                   </motion.span>
                 ))}
-              </motion.h3>
-            </VisibilitySensor>
-            <div className='h-4 w-full border-8 mb-16 flex items-center justify-center'>
-              <Icon icon="mdi:about" width="124" className='' />
-            </div>
-            
-              <p
-                className='text-2xl w-3/4 mb-16'
-                
-              >
-                {contenido[idiomaActual]}
-              </p>
-            
+              </span>
+              <br></br>
+              <span className="text-violet-600 text-6xl sm:text-4xl">
+                {titulos[idiomaActual].split("").map((char, index) => (
+                  <motion.span
+                    key={char + "-" + index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: inViewImage ? 1 : 0 }}
+                    transition={{ duration: 1, ease: "easeIn" }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </span>
+            </h2>
           </div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
+
+      <motion.div
+        className="flex justify-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: inViewText ? 1 : 0 }}
+        transition={{ duration: 1.3, ease: "easeInOut" }}
+        ref={refAboutText}
+      >
+        <div
+          className="text-gray-700 w-1/2 font-oswald text-xl p-4 border-b-8 mt-6 sm:w-[95%] sm:px-4"
+          style={{ whiteSpace: "pre-line" }}
+        >
+          {contenido[idiomaActual]}
+        </div>
+      </motion.div>
     </>
   );
 };
+
+export default About;

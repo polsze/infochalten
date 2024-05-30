@@ -75,11 +75,6 @@ export const Contact = () => {
     },
   };
 
-  const [isVisible, setIsVisible] = useState(false);
-
-  const onVisibilityChange = (isVisible) => {
-    setIsVisible(isVisible);
-  };
 
   const initialData = {
     nombre: "",
@@ -135,18 +130,13 @@ export const Contact = () => {
     onValidate
   );
 
-  useEffect(() => {
-    setIsVisible(false);
-  }, [idiomaActual]);
-
-
   return (
     <>
       <div className="w-full h-auto mt-20 bg-contactBg bg-contain pb-2 xxl:bg-cover" id="contact">
         <div className="flex flex-col items-center m-auto w-[60%] h-auto bg-gray-100 shadow-2xl shadow-orange-400 rounded-xl xl:w-[70%] lg:w-[90%] sm:w-[96%]">
           <div className="rounded-xl w-full" ref={refContact}>
             <motion.h4
-              className="text-5xl my-16 uppercase font-bold font-oswald text-center sm:text-2xl"
+              className="text-5xl my-16 uppercase font-bold font-solitreo text-center sm:text-2xl"
               variants={sentence}
               initial="hidden"
               animate={inViewContact ? "visible" : "hidden"}
@@ -158,16 +148,15 @@ export const Contact = () => {
               ))}
             </motion.h4>
             <div className="h-1 w-full border-8 border-gray-300 mb-16 flex items-center justify-center">
-              <Icon icon="basil:contacts-solid" width="124" className="" />
+              <Icon icon="flat-color-icons:business-contact" width="124" className="" />
             </div>
-
             <form className="flex flex-col" onSubmit={handleSubmit}>
-              <label className="form-label font-bold px-2 text-xl ml-6  2xl:text-2xl sm:ml-1">
+              <label className="form-label font-bold px-2 text-xl ml-6 font-solitreo  2xl:text-2xl sm:ml-1 sm:text-lg">
                 {labels[idiomaActual].nombre}
               </label>
               <input
                 type="text"
-                className="form-control rounded-xl mx-6 px-2 sm:w-[95%] sm:mx-auto hover:bg-sky-200"
+                className="text-sm form-control rounded-xl mx-6 px-2 sm:w-[95%] sm:mx-auto hover:bg-sky-200"
                 name="nombre"
                 value={form.nombre}
                 onChange={handleChange}
@@ -179,12 +168,12 @@ export const Contact = () => {
                 </div>
               )}
 
-              <label className="form-label pt-2 px-2 ml-6 font-bold text-xl  2xl:text-2xl sm:ml-1 sm:pl-2">
+              <label className="form-label pt-2 px-2 ml-6 font-bold text-xl font-solitreo 2xl:text-2xl sm:ml-1 sm:pl-2 sm:text-lg">
                 {labels[idiomaActual].correo}
               </label>
               <input
                 type="email"
-                className="form-control mx-6 rounded-xl px-2 sm:w-[95%] sm:mx-auto hover:bg-sky-200 "
+                className="text-sm form-control mx-6 rounded-xl px-2 sm:w-[95%] sm:mx-auto hover:bg-sky-200 "
                 name="correo"
                 value={form.correo}
                 onChange={handleChange}
@@ -196,12 +185,12 @@ export const Contact = () => {
                 </div>
               )}
 
-              <label className="form-label pt-2 px-2 ml-6 font-bold text-xl 2xl:text-2xl sm:pl-2 sm:ml-1">
+              <label className="form-label pt-2 px-2 ml-6 font-bold font-solitreo text-xl 2xl:text-2xl sm:pl-2 sm:ml-1 sm:text-lg">
                 {labels[idiomaActual].asunto}
               </label>
               <input
                 type="text"
-                className="form-control mx-6 px-2 rounded-xl sm:w-[95%] sm:mx-auto hover:bg-sky-200"
+                className="text-sm form-control mx-6 px-2 rounded-xl sm:w-[95%] sm:mx-auto hover:bg-sky-200"
                 name="asunto"
                 value={form.asunto}
                 onChange={handleChange}
@@ -213,12 +202,12 @@ export const Contact = () => {
                 </div>
               )}
 
-              <label className="form-label pt-2 px-2 ml-6 font-bold text-xl 2xl:text-2xl sm:pl-2 sm:ml-1">
+              <label className="form-label pt-2 px-2 ml-6 font-bold font-solitreo text-xl 2xl:text-2xl sm:pl-2 sm:ml-1 sm:text-lg">
                 {labels[idiomaActual].telefono}
               </label>
               <input
                 type="text"
-                className="form-control px-2 mx-6 rounded-xl sm:w-[95%] sm:mx-auto hover:bg-sky-200"
+                className="text-sm form-control px-2 mx-6 rounded-xl sm:w-[95%] sm:mx-auto hover:bg-sky-200"
                 name="telefono"
                 value={form.telefono}
                 onChange={handleChange}
@@ -230,11 +219,11 @@ export const Contact = () => {
                 </div>
               )}
 
-              <label className="form-label pt-2 px-2 ml-6 font-bold text-xl 2xl:text-2xl sm:pl-2 sm:ml-1">
+              <label className="form-label pt-2 px-2 ml-6 font-bold font-solitreo text-xl 2xl:text-2xl sm:pl-2 sm:ml-1 sm:text-lg">
                 {labels[idiomaActual].mensaje}
               </label>
               <textarea
-                className="form-control mx-6 px-2 rounded-xl sm:w-[95%] sm:mx-auto hover:bg-sky-200"
+                className="form-control mx-6 px-2 rounded-xl sm:w-[95%] sm:mx-auto hover:bg-sky-200 text-sm"
                 name="mensaje"
                 value={form.mensaje}
                 onChange={handleChange}
@@ -250,8 +239,8 @@ export const Contact = () => {
 
               <div className="flex items-center justify-center py-4">
                 <motion.button
-                  className="text-white py-2 rounded-xl font-bold text-xl bg-gradient-to-b from-yellow-400 via-orange-400 to-orange-500 
-              w-[20%] sm:w-[95%]"
+                  className="text-white py-2 rounded-xl font-bold font-solitreo text-xl bg-gradient-to-b from-yellow-400 via-orange-400 to-orange-500 
+              w-[20%] sm:w-[95%] transition-all duration-300 ease-linear hover:shadow-naranja "
                   type="submit"
                   disabled={loading}
                 >

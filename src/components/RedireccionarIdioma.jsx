@@ -17,7 +17,6 @@ const RedireccionarIdioma = () => {
     }
   }, [idiomaActual, location.pathname, navigate]);
 
-  // En lugar de renderizar algo, simplemente redirigimos
   return null;
 };
 

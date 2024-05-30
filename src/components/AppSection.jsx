@@ -16,20 +16,19 @@ import {
 export const AppSection = () => {
   const [ref, inView] = useInView({
     triggerOnce: false,
-    rootMargin: "-100px 0px", // Adjust the root margin as needed
+    rootMargin: "-100px 0px", 
   });
 
   const { idiomaActual } = useIdioma();
 
-
   const titulo = {
-    'es' : '¿Porqué usar nuestra App?',
-    'en' : 'Why use the InfoChaltén App?'
+    'es' : '¿Por qué usar nuestra aplicación?',
+    'en' : 'Why use the InfoChalten App?'
   }
 
   const descripcion = {
-    'es' : "En Info Chalten vas a encontrar toda la información que necesitás concentrada en un solo lugar, organizada por categorías para que puedas acceder fácilmente a lo que estás buscando. Ya sea que estés de viaje para conocer nuestro pueblo, que vengas a trabajar por la temporada o seas residente, Info Chalten será tu aliada para encontrar eso que querés, No te pierdas de nada! Y además de todo lo que tiene para ofrecerte ¡es Gratis!",
-    'en' : "In Info Chalten, you will find all the information you need concentrated in one place, organized by categories so you can easily access what you're looking for. Whether you're traveling to explore our town, coming to work for the season, or a resident, Info Chalten will be your ally in finding what you want. Don't miss out on anything! And besides all it has to offer, it's Free!"
+    'es' : "En InfoChalten vas a encontrar toda la información que necesitás concentrada en un solo lugar, organizada por categorías para que puedas acceder fácilmente a lo que estás buscando. Ya sea que estés de viaje para conocer nuestro pueblo, que vengas a trabajar por la temporada o seas residente, Info Chalten será tu aliada para encontrar eso que querés, No te pierdas de nada! Y además de todo lo que tiene para ofrecerte ¡es Gratis!",
+    'en' : "In InfoChalten, you will find all the information you need concentrated in one place, organized by categories so you can easily access what you're looking for. Whether you're traveling to explore our town, coming to work for the season, or a resident, Info Chalten will be your ally in finding what you want. Don't miss out on anything! And besides all it has to offer, it's Free!"
   }
 
   const texto1 = {
@@ -152,11 +151,11 @@ export const AppSection = () => {
           animate={{ opacity: inView ? 1 : 0, x: inView ? 0 : "-50%" }}
           transition={{ duration: 2, ease: "easeInOut" }}
         >
-          <div className=" max-w-2xl lg:text-center">
-            <h2 className="text-base font-semibold leading-7 text-indigo-600">
-              Info Chalten
-            </h2>
-            <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <div className="font-solitreo max-w-2xl lg:text-center">
+            <h3 className="text-base font-semibold leading-7 text-orange-500">
+              InfoChalten
+            </h3>
+            <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-xl">
               {titulo[idiomaActual]}
             </p>
             <p className="mt-6 text-lg leading-8 text-gray-600">
@@ -167,11 +166,11 @@ export const AppSection = () => {
           <div
             className=" mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl"
           >
-            <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none">
+            <dl className="grid max-w-xl grid-cols-2 gap-x-8 gap-y-10 lg:max-w-none sm:grid-cols-1">
               {features.map((feature) => (
-                <div key={feature.id} className="relative pl-16">
-                  <dt className="text-base font-semibold leading-7 text-gray-900">
-                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
+                <div key={feature.id} className="font-solitreo relative pl-16">
+                  <dt className="text-base font-semibold leading-7 text-gray-900 ">
+                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-orange-500 ">
                       <feature.icon
                         className="h-6 w-6 text-white"
                         aria-hidden="true"
@@ -186,8 +185,8 @@ export const AppSection = () => {
               ))}
             </dl>
           </div>
-          <div className=" max-w-2xl lg:text-center">
-            <p className="mt-16 text-3xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+          <div className="font-solitreo max-w-2xl lg:text-center">
+            <p className="mt-16 text-3xl font-bold tracking-tight text-gray-900 sm:text-2xl">
               {texto1[idiomaActual]}
             </p>
             <p className="mt-6 text-xl leading-8 font-medium text-gray-600">

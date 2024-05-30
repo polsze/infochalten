@@ -8,18 +8,26 @@ export default {
     extend: {
       fontFamily: {
         'oswald': ['Oswald', 'sans-serif'],
+        'amatic': ["Amatic SC", 'sans-serif'],
+        'protest': ["Protest Riot", 'sans-serif'],
+        'solitreo': ["Solitreo", 'cursive'],
+      },
+      boxShadow: {
+        violeta: "0 0 5px theme('colors.purple.500'), 0 0 20px theme('colors.purple.700')",
+        verde: "0 0 5px theme('colors.lime.200'), 0 0 20px theme('colors.lime.500')",
+        naranja: "0 0 5px theme('colors.orange.200'), 0 0 20px theme('colors.orange.500')",
       },
       backgroundImage: {
-        'heroBg': 'url(./assets/img/elchalten.webp)',
+        'heroBg': 'url(./assets/img/hero-esp.webp)',
+        'heroBgEn': 'url(./assets/img/hero-en.webp)',
+        'heroBgX': 'url(./assets/img/bg-small.webp)',
+        'comp': 'url(./assets/img/fondo-companies.webp)',
         'smartBg': 'url(./assets/img/smart.avif)',
         'smartBg2': 'url(./assets/img/smartBg.avif)',
         'aboutBg2': 'url(./assets/img/bgx.webp)',
         'contactBg': 'url(./assets/img/bgContact.avif)',
         'paintBg': 'url(./assets/img/bgInstall.webp)',
         'SectionBg': 'url(./assets/img/bgAppSection.webp)',
-
-
-
       }
     },
     screens:{

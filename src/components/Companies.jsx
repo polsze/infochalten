@@ -11,7 +11,7 @@ const Companies = () => {
   };
 
   const descripcion = {
-    'es': 'Aprovechá al máximo su presencia en InfoChalten! Al unirse a nuestra plataforma, tu empresa disfrutará de una serie de beneficios exclusivos diseñados para aumentar su visibilidad y conectividad con los clientes.',
+    'es': 'Aprovechá al máximo su presencia en InfoChalten! Al unirse a nuestra aplicación, tu empresa disfrutará de una serie de beneficios exclusivos diseñados para aumentar su visibilidad y conectividad con los clientes.',
     'en': 'Maximize your presence on InfoChalten! By joining our platform, your company will enjoy a range of exclusive benefits designed to increase its visibility and connectivity with customers.',
   };
 
